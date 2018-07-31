@@ -12,3 +12,11 @@ ssh-keygen -t rsa -C "youremail@example.com"  #生成密钥
 
 
  每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+
+ 提交到远程的步骤：
+
+ git add 文件1
+
+ git commit -m <message>
+
+ git push origin master
