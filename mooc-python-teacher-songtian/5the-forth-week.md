@@ -96,21 +96,224 @@ drawGap()
 
 
 
+#代码复用于函数递归
+- 代码复用与模块化设计
+- 函数递归的理解
+- 函数递归的调用过程
+- 函数递归实例解析
+
+
+## 1. 代码复用与模块化设计
+
+代码复用
+打代码当成资源进行抽象
+
+- 代码资源化：程序代码使用用来表达计算的“资源”
+- 代码抽象化：使用函数等方法对代码赋予更高级别的定义
+- 代码复用： 同一份代码在需要时可以被重复使用
+
+### 函数和对象是代码复用的两种主要形式
+
+函数：将代码命名在代码层面建立了初步抽象
+对象：属性和方法 <a>.<b>和<a>.<b>()在函数之上再次组织进行抽象
+
+
+模块化设计
+“分而治之”
+- 通过函数或对象封装将程序划分为模块及模块间的表达
+- 具体包括：主程序、子程序和子程序间的关系
+- 分而治之：一种分而治之、分层抽象、体系化的设计思想
+
+“紧耦合，松耦合”
+- 紧耦合： 两个部分之间交流很多，无法独立存在
+- 松耦合： 两个部分之间交流较少，可以独立存在
+- 模块内部紧耦合，模块之间松耦合
 
 
 
+函数递归的理解
+递归的定义
+函数定义中调用函数自身的方式
+
+n! = 1     ,n=0
+   =n(n-1),otherwise
+
+两个关键特征：
+- 链条： 计算过程中存在递归链条
+- 基例： 存在一个或多个不需要再次递归的基例
+
+
+类似数学归纳法：
+- 数学归纳法：
+- 证明当n取第一个值n0时命题成立
+- 假设当nk时命题成立，证明当n=n(k+1)时命题也成立
+- 递归是数学法思维在编程当中的一种体现
+
+递归的实现
+n! = 1     ,n=0
+   =n(n-1),otherwise
+
+def fact(n):
+    if n==0:
+        return 1:
+    else:
+        return n*fact(n-1)
+
+递归的实现
+    函数+ 分支语句
+- 递归本身是一个函数，需要定义函数定义方式描述
+- 函数内部，采用分支语句对输入参数进行判断
+- 基例和链条，分别编写对应代码
+
+递归的调用过程：
+    当n=5时，会调用fact(5)的内容，接着遇到代码fact(4),然后会单独开辟一段空间来计算fact(4).
+
+函数递归实例解析：
+字符串反转：
+    将字符串s反转输出
+    >>>s[::-1] -1的步长从后往前输出
+- 函数+分支结构
+- 分支中来区分递归链条和基例
+
+def rvs(s):
+    if s == "":
+        return s
+    else:
+        return rvs(s[1:])+s[0]
+  
+
+斐波那契数列数列：
+    一个经典数列：
+
+        F(n)= 1                 n=1
+              1                 n=2
+              F(n-1)+F(n-2)     otherwise
+
+    F(n) = F(n-1)+F(n-2)
+                            def f(n):
+    - 函数 + 分支结构                 if n == 1 or n == 2:
+    - 递归链条                           return 1
+
+    - 递归基例                       else:
+                                        return f(n-1)+f(n-2)
+
+
+# 汉诺塔：
+       递归：函数+分支机构
+   将n个有序的圆盘从A柱子经中间柱子B搬到C柱子，其中：src表示A柱子，dst表示C柱子，mid表示中间柱子B。
+
+   count = 0
+   def hanoi(n,src,dst,mid):
+        global count
+        if n == 1:  基例
+            print("{}:{}->{}".format(1,src,dst))
+            count +=1
+        处理n与n-1的关系：将n-1的圆盘搬到中间柱子mid,将A柱子剩的最后一个目标圆盘搬到目标柱子C：
+        else:
+            hanoi(n-1,src,mid,dst)
+            print("{}:{}->{}".format(n,src,dst))
+            count+=1
+            hanoi(n-1,mid,dst,src)
+对递归链条的描述。
+
+
+# 模块四：PyInstaller库的使用
+
+将.py源代码转换成无需源代码的可执行文件
+
+- .py  -> PyInstaller ->  - windows(exe文件)
+                          - Linux
+                          - Mac OS X
+
+
+PyInstaller 库描述
+    第三方库
+    - 官方网站： http://www.pyinstaller.org
+    - 使用前需要使用Pip工具
+使用：
+    (cmd命令行) pyinstaller -F <文件名.py>
+
+pyinstall 库常用参数
+
+- h   查看帮助
+-- clean 清理打包过程中大的临时文件
+-D,--onedir 默认值，生成dist文件夹
+-F,--onefile 在dist文件夹中只生成独立的打包文件
+-i <图标文件名.ico>指定打包程序使用的图标(icon)文件
+
+使用举例：
+ pyinstaller -i curve.ico -F XX.py
+ # 将图标与打包的文件关联，打包后的exe文件可以直接发送给别人。
+
+# 5.5 实例8 科赫雪花小包裹
+高大上的分型几何
+- 分形几何是一种迭代的几何图形，广泛存在于自然界中
+
+科赫雪花绘制
+用Python绘制科赫曲线
+绘制n阶科赫曲线线段
+
+- 递归思想： 函数+分支
+- 递归链条：线段的组合
+- 递归基例：初识线段
+
+
+import turtle
+def koch(size,n):
+    if n == 0:
+        turtle.fd(size)
+    else:
+        for angle in [0,60,-120,60]:
+            turtle.left(angle)
+            koch(size/3,n-1)
+def main():
+    turtle.setup(800,600)
+    turtle.penup()
+    turtle.goto(-300,-50)
+    turtle.pendown()
+    turtle.pensize(2)
+    koch(600,3)  # 3阶科赫曲线，阶数
+    turtle.hideturtle()
+main()
 
 
 
+科赫曲线的绘制 -> 科赫雪花的绘制
 
 
+import turtle
+def koch(size,n):
+    if n == 0:
+        turtle.fd(size)
+    else:
+        for angle in [0,60,-120,60]:
+            turtle.left(angle)
+            koch(size/3,n-1)
+def main():
+    turtle.setup(800,600)
+    turtle.penup()
+    turtle.goto(-300,-50)
+    turtle.pendown()
+    turtle.pensize(2)
+    level = 3  # 3阶科赫雪花，阶数
+    koch(400,level)
+    turtle.right(120)
+    koch(400,level)
+    turtle.right(120)
+    koch(400,level)
+    turtle.right(120)
+    turtle.hideturtle()
+main()
 
+科赫雪花 -- 举一反三
+绘制条件的扩展
+- 修改分形几何绘制阶数
+- 修改科赫曲线的基本定义以及旋转角度
+- 修改绘制科赫雪花的基础框架图形
 
-
-
-
-
-
-
+分形几何千千万
+- 康托尔基，谢尔宾斯基三角形，门格海绵
+- 龙形曲线，空间填充曲线，科赫曲线
+- 函数递归的深入应用
 
 
