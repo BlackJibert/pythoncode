@@ -24,7 +24,7 @@ def binary_search(x):
 
 # "递归二分查找"
 def recursion_binary_serch(a, x):
-    # a = [1,2,3,4,5,6,7]
+    # a = [1,2,3,4,5,6,7.docx]
     n = len(a)
     time = 0
     mid = n // 2
