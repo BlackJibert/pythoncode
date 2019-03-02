@@ -30,9 +30,10 @@ class ImagesSpider(scrapy.Spider):
         # print(model_dict["list"])
         for element in model_dict["list"]:
             item = Images360Item()
+            item["id"] = element["imageid"]
             item["title"] = element["group_title"]
             item["tags"] = element["tag"]
             item["height"] = element["cover_height"]
-            item["weight"] = element["cover_width"]
+            item["width"] = element["cover_width"]
             item["url"] = element["qhimg_thumb_url"]
             yield item

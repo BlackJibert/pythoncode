@@ -4,15 +4,16 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-import pymongo
+import logging
 
+import pymongo
 # 创建保存到MongoDB的Pipeline
 import pymysql
-
 from scrapy import Request
 from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
 
+logger = logging.getLogger('ImagePipeline')
 
 class Images360ToMongoPipeline(object):
     def __init__(self, mongo_url, mongo_db):
@@ -29,7 +30,8 @@ class Images360ToMongoPipeline(object):
         self.db = self.client[self.mongo_db]
 
     def process_item(self, item, spider):
-        name = item.__class__.__name
+        # name = item.__class__.__name
+        name = item.collection
         self.db[name].insert(dict(item))
         return item
 
@@ -67,7 +69,7 @@ class Images360ToMySqlPipeline(object):
         data = dict(item)
         keys = ','.join(data.keys())
         values = ','.join(['%s'] * len(data))
-        sql = "insert into %s (%s) values(%s)" % (item.table, keys, values)
+        sql = 'insert into %s (%s) values(%s)' % (item.table, keys, values)
         self.cursor.execute(sql, tuple(data.values()))
         self.db.commit()
         return item
@@ -83,6 +85,7 @@ class ImagePipeline(ImagesPipeline):
         image_paths = [x['path'] for ok, x in results if ok]
         if not image_paths:
             raise DropItem('Image Downloaded Failed')
+        logger.debug("图片下载成功")
         return item
 
     def get_media_requests(self, item, info):
