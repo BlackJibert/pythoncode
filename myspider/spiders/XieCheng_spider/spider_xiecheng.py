@@ -71,7 +71,7 @@ class XieCheng():
                 div_me.append(messages)
             return div_me
 
-        elif single_trip != None:
+        elif single_trip == False:
             # 往返
             try:
                 first_url = "https://flights.ctrip.com/"
@@ -258,9 +258,9 @@ xiecheng = XieCheng()
 # 单程
 # source = xiecheng.get_source("北京", '上海', "2019-04-02")
 # 往返
-# source = xiecheng.get_source("北京", '上海', "2019-04-02", "2019-04-04", False, False)
+source = xiecheng.get_source("北京", '上海', "2019-04-02", None, None, None, "2019-04-04", False, False)
 
 # 多程
 
-source = xiecheng.get_source("北京", '上海', "2019-04-02", "广州", "南京", "2019-04-04", None, None, True)
+# source = xiecheng.get_source("北京", '上海', "2019-04-02", "广州", "南京", "2019-04-04", None, None, True)
 print(source)
