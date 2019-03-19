@@ -8,3 +8,7 @@
 2、异常：StaleElementReferenceException 的处理：
     参考：https://blog.csdn.net/zby_hlx/article/details/79552357
 
+3、使用chrome的Headless模式，也就是无界面模式，这样爬取的时候就不会弹出浏览器了。
+chrome_options =webdriver.ChromeOptions()
+chrome_options.add_argument('--headless')
+self.driver = webdriver.Chrome(options=chrome_options)
