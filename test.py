@@ -22,4 +22,6 @@ def tempConvert():
     return temp
 
 
+# curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+# curl -sSL https://get.daoloud.io/docker | sh
 tempConvert()
