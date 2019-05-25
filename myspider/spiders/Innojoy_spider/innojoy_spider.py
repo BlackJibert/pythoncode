@@ -13,7 +13,8 @@ class innojoy_spider():
         # Selenium+Headless Chrome
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--headless')
-        self.driver = webdriver.Chrome(options=chrome_options)
+        # self.driver = webdriver.Chrome(options=chrome_options)
+        self.driver = webdriver.Chrome()
         self.url = "http://www.innojoy.com/search/index.html"
 
     def get_source(self, search_message):
@@ -45,6 +46,7 @@ class innojoy_spider():
             sleep(3)
             search_.send_keys(search_message)
             search_.send_keys(Keys.ENTER)
+            print("hello")
         except StaleElementReferenceException:
             search_ = self.driver.find_element_by_xpath('//div[@class="searchinput"]/input[@id="queryExpr-str"]')
             # print(search_)

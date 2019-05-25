@@ -18,17 +18,17 @@ def file_to_csv():
                 'hour', 'industry', 'key', 'label',
                 'link', 'query', 'time', 'website']
 
-    csvFile3 = open(strFile, 'w', newline='',encoding='utf-8')
+    csvFile3 = open(strFile, 'w', newline='', encoding='utf-8')
     writer2 = csv.writer(csvFile3)
     #插入表头
     writer2.writerow(headList)
     #从find的数据库中找到需要的字段
     for One in _table.find():
-        OneList =[One['title'], One['Time_Stamp'],One['caption'], One['hour'],
-        One['industry'],
-        One['key'], One['label'],
-        One['link'], One['query'],
-        One['time'], One['website']]
+        OneList = [One['title'], One['Time_Stamp'], One['caption'], One['hour'],
+                   One['industry'],
+                   One['key'], One['label'],
+                   One['link'], One['query'],
+                   One['time'], One['website']]
 
         Two_List = []
         for One2 in OneList:
