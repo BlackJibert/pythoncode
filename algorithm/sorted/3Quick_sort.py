@@ -6,7 +6,6 @@
 快排是原地排序，只需要一个很小的辅助栈，时间复杂度为NlogN
 """
 
-
 def QuickSort(myList, start, end):
     # 判断low是否小于high,如果为false,直接返回
     if start < end:
