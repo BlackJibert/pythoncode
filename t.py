@@ -292,8 +292,168 @@
 # id_ = re.search('\d+', 'https://item.jd.com/46611856075.html').group()
 # print(id_)
 
-A = [1, 2]
-B = [A] * 5
-print(B)
-B[0][1] = 9
-print(B)
+# A = [1, 2]
+# B = [A] * 5
+# print(B)
+# B[0][1] = 9
+# print(B)
+#
+# l1 = [3, [55, 44], (7, 8, 9)]
+# l2 = list(l1)
+# print(l2)
+# print(l2 == l1)
+# print(l2 is l1)
+
+# import copy
+# class Bus:
+#     def __init__(self,passengers=None):
+#         if passengers is None:
+#             self.passengers = []
+#         else:
+#             self.passengers = passengers
+#     def pick(self,name):
+#         self.passengers.append(name)
+#     def drop(self,name):
+#         self.passengers.remove(name)
+# bus1 = Bus(['Alice', 'Bill', 'Claire', 'David'])
+# bus2 = copy.copy(bus1)
+# bus3 = copy.deepcopy(bus1)
+# print(id(bus1), id(bus2), id(bus3))
+# bus1.drop('Bill')
+# print(bus2.passengers)
+# print(id(bus1.passengers), id(bus2.passengers),id(bus3.passengers))
+# print(bus3.passengers)
+# class HauntedBus:
+#     """
+#     备受幽灵乘客折磨的校车
+#     """
+#     def __init__(self,passengers =None):
+#         if passengers is None:
+#             self.passengers = []
+#         else:
+#             self.passengers = list(passengers)
+#
+#     def pick(self,name):
+#         self.passengers.append(name)
+#     def drop(self,name):
+#         self.passengers.remove(name)
+#
+# bus1 = HauntedBus(['Alice','Bill'])
+# print(bus1.passengers)
+# bus1.pick('Charlie')
+# bus1.drop('Alice')
+# print(bus1.passengers)
+# bus2 = HauntedBus()
+# bus2.pick('Carrie')
+# print(bus2.passengers)
+# bus3 = HauntedBus()
+# print(bus3.passengers)
+# bus3.pick('Dive')
+# print(bus2.passengers)
+# print(bus2.passengers is bus3.passengers)
+# print(bus1.passengers)
+
+
+# import copy
+# class Bus:
+#     def __init__(self, passengers=None):
+#         if passengers is None:
+#             self.passengers = []
+#         else:
+#             self.passengers = passengers
+#     def pick(self,name):
+#         self.passengers.append(name)
+#     def drop(self,name):
+#         self.passengers.remove(name)
+# bus1 = Bus(['Alice', 'Bill', 'Claire', 'David'])
+# bus2 = copy.copy(bus1)
+# bus3 = copy.deepcopy(bus1)
+# print(id(bus1), id(bus2), id(bus3))
+# bus1.drop('Bill')
+# print(bus2.passengers)
+# print(id(bus1.passengers), id(bus2.passengers),id(bus3.passengers))
+# print(bus3.passengers)
+# t = (1,2,[30,40])
+# t[2] += [50,60]
+
+
+# board = [['_'] * 3 for i in range(3)]
+# print(board)
+# board[1][2] = 'X'
+# print(board)
+# fruits = ['grape', 'raspberry', 'apple', 'banana']
+# print("未排序：", fruits)
+# print(sorted(fruits))
+# print("sorted：", fruits)
+# print(sorted(fruits,reverse=True))
+# print(sorted(fruits,key=len))
+# print(sorted(fruits,key=len,reverse=True))
+# print(fruits)
+# fruits.sort()
+# print(fruits)
+# import bisect
+# import sys
+# HAYSTACK = [1, 4, 5, 6, 8, 12, 15, 20, 21, 23, 23, 26, 29, 30]
+# NEEDLES = [0, 1, 2, 5, 8, 10, 22, 23, 29, 30, 31]
+# ROW_FMT = '{0:2d} @ {1:2d}   {2}{0:2d}'
+# def demo(bisect_fn):
+#     for needle in reversed(NEEDLES):
+#         position = bisect_fn(HAYSTACK, needle)
+#         offset = position * '  |'
+#         print(ROW_FMT.format(needle, position, offset))
+#     # return bisect_fn
+#
+# if __name__ == '__main__':
+#     if sys.argv[-1] == 'left':
+#         bisect_fn = bisect.bisect_left
+#     else:
+#         bisect_fn = bisect.bisect
+#     print('DEMO:', bisect_fn.__name__)
+#     print('haystack ->', ' '.join('%2d' % n for n in HAYSTACK))
+#     demo(bisect_fn)
+
+
+# import bisect
+# def grade(score,breakpoint = [60,70,80,90],grades='FDCBA'):
+#     i = bisect.bisect(breakpoint, score)
+#     return grades[i]
+# t = [grade(score) for score in [33,99,77,70,89,91,10]]
+# print(t)
+
+# import bisect
+# import random
+# SIZE = 7
+# random.seed(1729)
+# my_list = []
+# for i in range(SIZE):
+#     new_item = random.randrange(SIZE*2)
+#     bisect.insort(my_list, new_item)
+#     print('%2d ->' % new_item, my_list)
+
+# import numpy
+# a = numpy.arange(12)
+# print(a)
+# print(type(a))
+# print(a.shape)#查看维度
+# a.shape = 3, 4 #变成二维的
+# print(a)
+# print(a[2])
+# print(a[2, 1])
+# print(a[:, 1])
+# t = a.transpose() #行列交换,得到新的数组
+# print(t)、
+def deco(func):
+    def inner():
+        print('running inner()')
+
+    return inner
+
+
+@deco
+def target():
+    print('running target()')
+
+
+target()
+
+print(target)
